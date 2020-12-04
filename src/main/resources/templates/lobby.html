@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Lobby</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/fragments/menu"></th:block>
+
+<div>
+    <div>
+        <h2 th:if="${players eq null or players.empty}">No players yet!</h2>
+        <div th:if="${players ne null and not players.empty}">
+
+            <h2>players</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>nickName</th>
+                    <th>Email</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${players}">
+                    <td th:text="${item.nickName}"></td>
+                    <td th:text="${item.email}"></td>
+                    <td th:text="${item.creationDate}"></td>
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.password}"></td>
+                    <td><a th:href="@{/edit/{id}(id=${item.id})}">Edit</a></td>
+                    <td><a th:href="@{/delete/{id}(id=${item.id})}">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="/new">Add</a></p>
+    </div>
+</body>
+</html>
